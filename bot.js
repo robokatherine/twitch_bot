@@ -34,8 +34,7 @@ function onMessageHandler (target, context, msg, self) {
 
     // If the command is known, let's execute it
     if (commandName === '!d20') {
-	const num = rollDice(20);
-	client.say(target, `You rolled a ${num}`);
+	client.say(target, `${rollDice(20)}`);
 	console.log(`* Executed ${commandName} command`);
     } else if (commandName === '!whatsgoingon'){
     client.say(target, `${project_description}`);
@@ -56,7 +55,20 @@ function onMessageHandler (target, context, msg, self) {
 
 // Function called when the "dice" command is issued
 function rollDice (sides) {
-    return Math.floor(Math.random() * sides) + 1;
+    const num = Math.floor(Math.random() * sides) + 1;
+    if (num === 1) {
+        return `Well. You rolled a 1. RIP in pieces.`;
+    } else if (num < 6) {
+        return `You rolled a ${num}. Better luck next time, bud.`;
+    } else if (num < 11) {
+        return `You rolled a ${num}. It could be worse.`;
+    } else if (num < 16) {
+        return `You rolled a ${num}. Neat!`;
+    } else if (num < 20) {
+        return `You rolled a ${num}! NICE!`;
+    } else {
+        return `YOU ROLLED A 20! FRIGGIN SWEET!`;
+    }
 }
 
 // Called every time the bot connects to Twitch chat
